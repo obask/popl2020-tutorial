@@ -1,0 +1,22 @@
+name: check-cmake-build
+on: [push]
+env:
+  BUILD_TYPE: Debug
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure CMake
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      - name: Build all
+        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      - name: Run ex1 tests
+        if: always()
+        run: cd ${{github.workspace}}/build/ex1 && ctest
+      - name: Run ex2 tests
+        if: always()
+        run: cd ${{github.workspace}}/build/ex2 && ./dse
+      - name: Run ex3 tests
+        if: always()
+        run: cd ${{github.workspace}}/build/ex3 && ctest

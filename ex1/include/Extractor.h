@@ -7,6 +7,8 @@
 #include "llvm/IR/Instructions.h"
 #include "llvm/IR/Type.h"
 #include <set>
+#include <map>
+#include <iostream>
 
 #include "Utils.h"
 
@@ -47,7 +49,7 @@ public:
 
   void extractConstraints(const InstMapTy &InstMap, Instruction *I);
 
-  void printTuple(std::string Name, Value *V1, Value *V2) {
+  static void printTuple(const std::string& Name, Value *V1, Value *V2) {
     std::cout << Name << "(\"" << toString(V1) << "\", \"" << toString(V2)
               << "\")" << std::endl;
   }

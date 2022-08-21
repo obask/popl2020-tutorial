@@ -7,6 +7,7 @@
 #include "llvm/IR/Instructions.h"
 #include "llvm/IR/Type.h"
 #include <set>
+#include <map>
 
 #include "Utils.h"
 

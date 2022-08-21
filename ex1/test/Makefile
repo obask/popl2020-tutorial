@@ -8,7 +8,7 @@ all: ${TARGETS}
 	clang -emit-llvm -S -fno-discard-value-names -c -o $@ $<
 
 %.out: %.ll
-	../build/constraint $< > $@ 2> $*.err
+	../../cmake-build-debug/ex1/constraint $< > $@ 2> $*.err
 
 clean:
 	rm -f *.ll *.out *.err ${TARGETS}
