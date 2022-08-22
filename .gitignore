@@ -17,7 +17,6 @@ build
 .idea/
 
 # bitcode and analysis output
-*.ll
 *.out
 *.err
 *.cov

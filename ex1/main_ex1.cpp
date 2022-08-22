@@ -12,5 +12,5 @@ int main(int argc, char **argv) {
 //    if (argc == 3 && !strcmp(argv[1], "-d"))
 //        Ext.print(InstMap);
 
-    return runConstraints(argv[1]);
+    runConstraints(argv[1], true);
 }

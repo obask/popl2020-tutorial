@@ -10,23 +10,23 @@
 
 using namespace llvm;
 
-int runConstraints(const char * fileName) {
+std::vector<std::string> runConstraints(const std::filesystem::path& fileName, bool debug) {
 
     LLVMContext Context;
     SMDiagnostic Err;
-    StringRef FileName(fileName);
+    StringRef FileName(fileName.c_str());
 
     std::unique_ptr<Module> Mod = parseAssemblyFile(FileName, Err, Context);
 
     if (!Mod) {
-        Err.print(fileName, errs());
-        return 1;
+        Err.print(fileName.c_str(), errs());
+        return {};
     }
 
-    Extractor Ext;
-    Ext.initialize();
-    z3::fixedpoint *Solver = Ext.getSolver();
-    z3::context &C = Ext.getContext();
+    Extractor extractor;
+    extractor.initialize();
+//    z3::fixedpoint *Solver = extractor.getSolver();
+    z3::context &C = extractor.getContext();
 
     InstMapTy InstMap;
     unsigned int Counter = 0;
@@ -38,15 +38,24 @@ int runConstraints(const char * fileName) {
 
     for (auto &F: *Mod) {
         for (inst_iterator I = inst_begin(F), E = inst_end(F); I != E; I++) {
-            Ext.extractConstraints(InstMap, &*I);
+            extractor.extractConstraints(InstMap, &*I);
         }
+    }
+    if (debug) {
+        extractor.print(InstMap);
     }
 
     std::cout << "Potential divide-by-zero points:" << std::endl;
+    std::vector<std::string> result;
     for (auto &Entry: InstMap) {
-        z3::check_result R = Ext.query(Entry.second);
-        if (R == z3::sat)
-            std::cout << toString(Entry.first) << std::endl;
+        z3::check_result R = extractor.query(Entry.second);
+        if (R == z3::sat) {
+            std::string tmp = toString(Entry.first);
+            result.push_back(tmp);
+            if (debug) {
+                std::cout << tmp << std::endl;
+            }
+        }
     }
-    return 0;
+    return result;
 }
