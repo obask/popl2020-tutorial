@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.16)
 
 project(popl2020-tutorial LANGUAGES CXX C)
 
@@ -46,5 +46,5 @@ llvm_map_components_to_libnames(llvm_libs support core irreader)
 enable_testing()
 
 add_subdirectory(ex1)
-add_subdirectory(ex2)
-add_subdirectory(ex3)
+# add_subdirectory(ex2)
+# add_subdirectory(ex3)
