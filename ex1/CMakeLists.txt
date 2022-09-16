@@ -1,20 +1,10 @@
 include(GoogleTest)
-include_directories(PRIVATE include)
 
-add_executable(constraint
-        src/Constraint.cpp
-        src/Extractor.cpp
-        src/Utils.cpp
-        main_ex1.cpp)
+add_executable(EX1_CODELAB ex1_main.cpp)
 
-target_link_libraries(constraint ${llvm_libs} ${Z3_LIBRARIES})
+target_link_libraries(EX1_CODELAB ${llvm_libs} ${Z3_LIBRARIES})
 
-add_executable(ex1_tests
-        ex1_tests.cpp
-        src/Constraint.cpp
-        src/Extractor.cpp
-        src/Utils.cpp
-        )
+add_executable(ex1_tests ex1_tests.cpp)
 
 target_link_libraries(ex1_tests ${llvm_libs} ${Z3_LIBRARIES} GTest::gtest_main)
 

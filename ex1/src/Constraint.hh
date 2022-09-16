@@ -5,8 +5,7 @@
 #include "llvm/Support/SourceMgr.h"
 #include <fstream>
 
-#include "Extractor.h"
-#include "Constraint.h"
+#include "Extractor.hh"
 
 using namespace llvm;
 

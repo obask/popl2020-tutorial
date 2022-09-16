@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <filesystem>
 
-#include "include/Constraint.h"
+#include "src/Constraint.hh"
 
 // Demonstrate some basic assertions.
 TEST(Ex1DivisionBy0Test, Loop0_ll) {
